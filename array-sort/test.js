@@ -20,6 +20,6 @@ assert.deepEqual(
 );
 
 assert.deepEqual(
-    sorter(example23),
+    sorter(example3),
     solution3
 );
