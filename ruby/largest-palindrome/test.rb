@@ -1,6 +1,43 @@
 def numeric_palindrome(*args)
-  # Enter your code here
+    args = *(args-[0])
+    if args.length < 2
+        return [0]
+    end
+
+    arr = [0]
+    (1..(2**args.size-1)).each do |mask|
+        count = 0
+        prod = 1
+        (0..args.size-1).each do |i|
+            if (mask & (1<<i)) > 0
+                count += 1
+                prod *= args[i]
+            end
+        end
+        if count > 1
+            arr.push(get_palindrom(prod))
+        end
+    end
+
+    arr.max
 end
+
+def get_palindrom(number)
+    ar = number.to_s.chars.map(&:to_i)
+    c = Hash.new(0)
+    ar.each {|d| c[d] += 1}
+    prefix = ""
+    9.downto(0) do |i|
+        if i > 0 || !prefix.empty?
+            prefix += i.to_s * (c[i]/2)
+            c[i] %= 2
+        end
+    end
+    middle = (0..9).select {|i| c[i] > 0}.max
+    ret = prefix.to_s + middle.to_s + prefix.to_s.reverse
+    ret.to_i
+end
+
 
 def assert_equal(actual, expected)
   if actual == expected
