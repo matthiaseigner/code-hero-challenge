@@ -1,7 +1,7 @@
 def numeric_palindrome(*args)
     args = *(args-[0])
     if args.length < 2
-        return [0]
+        return 0
     end
 
     arr = [0]
